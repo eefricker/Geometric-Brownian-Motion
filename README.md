@@ -1,4 +1,4 @@
-# GeometricBrownianMotion Project
+# Geometric Brownian Motion Project
 
 -Simple exploration using Geometric Brownian Motion as a model for daily equity (large cap) closing prices
 
@@ -9,3 +9,6 @@
 -Llung-Box Test for volatility clustering. Then a calculation of volatility according to a t-GARCH model
 
 -Lastly, Monte-Carlo path generation using the t-GARCH model (what not to do)
+
+![Alt text](assets/gbm_paths.png)
+![Alt text](assets/qq_jpm.png)

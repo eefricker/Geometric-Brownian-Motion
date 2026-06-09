@@ -12,11 +12,11 @@ static_coefficients = {'mu':.03,
 def make_month_grid(close):
 
     month_starts = []
-    for date in pd.date_range(dt.datetime(2015,1,1),dt.datetime(2025,4,1),freq='MS'):
+    for date in pd.date_range(dt.datetime(2015,1,1),dt.datetime(2025,12,1),freq='MS'):
         while date not in close.index:
             date = date+dt.timedelta(days=1)
         month_starts.append(date)
-    month_starts.append(dt.datetime(2025,5,1))
+    month_starts.append(dt.datetime(2026,1,1))
 
     return month_starts
 
@@ -38,6 +38,9 @@ def estimate_normal_coefficients(prev_data):
 
 	# MLE on normalized log returns to match a standard normal
     log_returns = np.log(prev_data / prev_data.shift(1)).dropna()
+    
+    # Formulas here are from Ito's Lemma on GBM, but for the purporses here, we actually undo most of these calculations
+    # I.e sigma/mu from below are not that useful for us, and the .std() and .mean() calls themselves are actually useful
     sigma = log_returns.std() * np.sqrt(252)
     mu = log_returns.mean() * 252 + 0.5 * sigma**2
     
